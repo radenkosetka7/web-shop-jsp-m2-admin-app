@@ -1,6 +1,53 @@
 package com.example.admin_app.beans;
 
+import com.example.admin_app.dao.UserDAO;
+import com.example.admin_app.dto.Admin;
+import com.example.admin_app.dto.CustomUser;
+import com.example.admin_app.dto.User;
+import com.example.admin_app.dto.enums.Status;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class UserBean implements Serializable {
+
+
+    public UserBean()
+    {
+    }
+
+    public Admin getUser(String username, String password)
+    {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        Admin admin= UserDAO.getUserByUsername(username);
+
+        return admin != null && bCryptPasswordEncoder.matches(password, admin.getPassword()) ? admin : null;
+    }
+
+    public List<CustomUser> getAllUsers()
+    {
+        return UserDAO.getAll();
+    }
+
+    public CustomUser getUserById(Integer id)
+    {
+        return UserDAO.getById(id);
+    }
+
+    public boolean updateUserStatus(Integer id, Status status)
+    {
+        return UserDAO.updateUserStatus(id,status);
+    }
+
+    public boolean updateUser(CustomUser customUser)
+    {
+        return UserDAO.updateUser(customUser);
+    }
+
+    public boolean insertUser(CustomUser customUser)
+    {
+        return UserDAO.insertUser(customUser);
+    }
 }

@@ -8,6 +8,9 @@ import java.util.List;
 
 public class LoggerBean implements Serializable {
 
+    public LoggerBean() {
+    }
+
     public List<Logger> getAll()
     {
         return LoggerDAO.getAll();

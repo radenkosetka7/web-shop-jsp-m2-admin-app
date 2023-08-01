@@ -12,7 +12,7 @@ import java.util.List;
 public class LoggerDAO {
 
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
-    private static final String SELECT_ALL_LOGS = "SELECT * FROM web_shop.logger";
+    private static final String SQL_SELECT_ALL_LOGS = "SELECT * FROM web_shop.logger";
 
     public LoggerDAO() {
     }
@@ -26,7 +26,7 @@ public class LoggerDAO {
 
         try {
             c = connectionPool.checkOut();
-            ps = DBUtil.prepareStatement(c, SELECT_ALL_LOGS, false);
+            ps = DBUtil.prepareStatement(c, SQL_SELECT_ALL_LOGS, false);
             rs = ps.executeQuery();
 
             while (rs.next()) {
