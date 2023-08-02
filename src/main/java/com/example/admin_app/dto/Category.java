@@ -15,11 +15,9 @@ public class Category implements Serializable {
 
     }
 
-    public Category(Integer id, String name, List<Attribute> attributes, List<Product> products) {
+    public Category(Integer id, String name) {
         this.id = id;
         this.name = name;
-        this.attributes = attributes;
-        this.products = products;
     }
 
     public Integer getId() {

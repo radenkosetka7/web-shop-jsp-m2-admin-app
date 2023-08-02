@@ -8,16 +8,13 @@ public class Product implements Serializable {
     private Integer id;
     private List<Comment> comments;
     private List<Image> images;
-
     public Product()
     {
 
     }
 
-    public Product(Integer id, List<Comment> comments, List<Image> images) {
+    public Product(Integer id) {
         this.id = id;
-        this.comments = comments;
-        this.images = images;
     }
 
     public Integer getId() {
