@@ -1,10 +1,8 @@
 package com.example.admin_app.dao;
 
-import com.example.admin_app.dto.Attribute;
 import com.example.admin_app.dto.Comment;
 import com.example.admin_app.dto.Image;
 import com.example.admin_app.dto.Product;
-import com.example.admin_app.dto.enums.Type;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,10 +1,8 @@
 package com.example.admin_app.dao;
 
 import com.example.admin_app.dto.Attribute;
-import com.example.admin_app.dto.Category;
 import com.example.admin_app.dto.enums.Type;
 
-import java.net.Proxy;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

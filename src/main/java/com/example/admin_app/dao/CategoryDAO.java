@@ -1,8 +1,8 @@
 package com.example.admin_app.dao;
 
-import com.example.admin_app.dto.*;
-import com.example.admin_app.dto.enums.Role;
-import com.example.admin_app.dto.enums.Status;
+import com.example.admin_app.dto.Attribute;
+import com.example.admin_app.dto.Category;
+import com.example.admin_app.dto.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,8 +17,45 @@ public class CategoryDAO {
     private static final String SQL_DELETE_CATEGORY = "DELETE FROM web_shop.category WHERE id=?";
     private static final String SQL_SELECT_ALL_CATEGORIES = "SELECT * FROM webshop_ip.category;";
     private static final String SQL_SELECT_CATEGORY_BY_ID="SELECT * from web_shop.category c where c.id=?";
+    private static final String SQL_INSERT_CATEGORY = "INSERT INTO webshop_ip.category (name) VALUES (?);";
+    private static final String SQL_UPDATE_CATEGORY = "UPDATE webshop_ip.category k SET name=? WHERE k.id=?;";
 
 
+    public static boolean insertCategory(Category category) {
+        Connection c = null;
+        PreparedStatement ps = null;
+        boolean result = false;
+
+        try {
+            c = connectionPool.checkOut();
+            ps = DBUtil.prepareStatement(c, SQL_INSERT_CATEGORY, false);
+            ps.setString(1,category.getName());
+            result=ps.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionPool.checkIn(c);
+        }
+        return result;
+    }
+
+    public static boolean updateCategory(Category category) {
+        Connection c = null;
+        PreparedStatement ps = null;
+        boolean result = false;
+
+        try {
+            c = connectionPool.checkOut();
+            ps = DBUtil.prepareStatement(c, SQL_UPDATE_CATEGORY, false);
+            ps.setString(1,category.getName());
+            result=ps.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionPool.checkIn(c);
+        }
+        return result;
+    }
     public static List<Category> getAllCategories()
     {
         List<Category> categories = new ArrayList<>();
