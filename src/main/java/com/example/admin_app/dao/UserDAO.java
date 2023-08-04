@@ -40,8 +40,7 @@ public class UserDAO {
             ps.setString(1, username);
             rs = ps.executeQuery();
             if (rs.next()) {
-                admin = new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getString("username"), rs.getString("password"),
-                        rs.getString("avatar"),rs.getString("password"),rs.getString("mail"), Status.valueOf(rs.getString("status")),Role.valueOf(rs.getString("role")));
+                admin = new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getString("username"), rs.getString("password"));
             }
             ps.close();
         } catch (SQLException e) {
@@ -65,8 +64,8 @@ public class UserDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                users.add(new CustomUser(rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getString("username"), rs.getString("password"),
-                        rs.getString("avatar"),rs.getString("password"),rs.getString("mail"), Status.valueOf(rs.getString("status")),Role.valueOf(rs.getString("role"))));
+                users.add(new CustomUser(rs.getInt("id"), rs.getString("name"), rs.getString("surname"),rs.getString("city"), rs.getString("username"), rs.getString("avatar"),
+                        rs.getString("password"),rs.getString("mail"), Status.valueOf(rs.getString("status")),Role.valueOf(rs.getString("role"))));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,8 +89,8 @@ public class UserDAO {
             rs = ps.executeQuery();
             while (rs.next())
             {
-                customUser=(new CustomUser(rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getString("username"), rs.getString("password"),
-                        rs.getString("avatar"),rs.getString("password"),rs.getString("mail"), Status.valueOf(rs.getString("status")),Role.valueOf(rs.getString("role"))));
+                customUser=(new CustomUser(rs.getInt("id"), rs.getString("name"), rs.getString("surname"),rs.getString("city"), rs.getString("username"), rs.getString("avatar"),
+                        rs.getString("password"),rs.getString("mail"), Status.valueOf(rs.getString("status")),Role.valueOf(rs.getString("role"))));
             }
             ps.close();
         } catch (SQLException e) {

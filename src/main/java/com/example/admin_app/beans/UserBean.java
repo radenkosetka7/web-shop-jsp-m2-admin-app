@@ -17,14 +17,6 @@ public class UserBean implements Serializable {
     {
     }
 
-    public Admin getUser(String username, String password)
-    {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
-        Admin admin= UserDAO.getUserByUsername(username);
-
-        return admin != null && bCryptPasswordEncoder.matches(password, admin.getPassword()) ? admin : null;
-    }
 
     public List<CustomUser> getAllUsers()
     {
