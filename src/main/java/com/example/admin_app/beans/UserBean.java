@@ -28,7 +28,7 @@ public class UserBean implements Serializable {
         return UserDAO.getById(id);
     }
 
-    public boolean updateUserStatus(Integer id, Status status)
+    public boolean updateUserStatus(Integer id, Integer status)
     {
         return UserDAO.updateUserStatus(id,status);
     }

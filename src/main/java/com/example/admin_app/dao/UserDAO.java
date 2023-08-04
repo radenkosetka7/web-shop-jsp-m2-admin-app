@@ -65,7 +65,7 @@ public class UserDAO {
 
             while (rs.next()) {
                 users.add(new CustomUser(rs.getInt("id"), rs.getString("name"), rs.getString("surname"),rs.getString("city"), rs.getString("username"), rs.getString("avatar"),
-                        rs.getString("password"),rs.getString("mail"), Status.valueOf(rs.getString("status")),Role.valueOf(rs.getString("role"))));
+                        rs.getString("password"),rs.getString("mail"), Status.getKey(rs.getInt("status")),Role.getKey(rs.getInt("role"))));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,7 +101,7 @@ public class UserDAO {
         return customUser;
     }
 
-    public static boolean updateUserStatus(Integer id,Status status) {
+    public static boolean updateUserStatus(Integer id,Integer status) {
         Connection c = null;
         PreparedStatement ps = null;
         boolean result = false;
@@ -109,7 +109,7 @@ public class UserDAO {
         try {
             c = connectionPool.checkOut();
             ps = DBUtil.prepareStatement(c, SQL_UPDATE_USER_STATUS, false);
-            ps.setString(1, status.toString());
+            ps.setInt(1, status);
             ps.setInt(2, id);
             result=ps.executeUpdate() == 1;
         } catch (SQLException e) {

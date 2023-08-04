@@ -4,6 +4,8 @@ import com.example.admin_app.beans.AdminBean;
 import com.example.admin_app.beans.CategoryBean;
 import com.example.admin_app.beans.LoggerBean;
 import com.example.admin_app.beans.UserBean;
+import com.example.admin_app.dto.CustomUser;
+import com.example.admin_app.dto.enums.Status;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +22,10 @@ public class Controller extends HttpServlet {
 
     private static final String LOGIN = "/WEB-INF/pages/login.jsp";
     private static final String LOGGER = "/WEB-INF/pages/home.jsp";
+    private static final String ERROR_PAGE = "/WEB-INF/pages/errorPage.jsp";
+    private static final String USERS = "/WEB-INF/pages/users.jsp";
+
+
 
 
     public Controller() {
@@ -75,7 +81,49 @@ public class Controller extends HttpServlet {
             }
             else
             {
+                UserBean userBean=(UserBean) session.getAttribute("userBean");
+                CategoryBean categoryBean=(CategoryBean) session.getAttribute("categoryBean");
+                if(action.equals("users"))
+                {
+                    address=USERS;
+                }
+                else if(action.equals("addUser"))
+                {
 
+                }
+                else if (action.equals("updateUser"))
+                {
+
+                }
+                else if(action.equals("deleteUser"))
+                {
+                    userBean.updateUserStatus(Integer.parseInt(req.getParameter("id")),Status.getValue(Status.BLOCKED));
+                    address=USERS;
+                }
+                else if(action.equals("categories"))
+                {
+
+                }
+                else if(action.equals("addCategory"))
+                {
+
+                }
+                else if(action.equals("updateCategory"))
+                {
+
+                }
+                else if(action.equals("deleteCategory"))
+                {
+
+                }
+                else if(action.equals("logs"))
+                {
+
+                }
+                else
+                {
+                    address=ERROR_PAGE;
+                }
             }
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher(address);
