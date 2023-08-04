@@ -15,10 +15,10 @@ public class CategoryDAO {
 
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
     private static final String SQL_DELETE_CATEGORY = "DELETE FROM web_shop.category WHERE id=?";
-    private static final String SQL_SELECT_ALL_CATEGORIES = "SELECT * FROM webshop_ip.category;";
+    private static final String SQL_SELECT_ALL_CATEGORIES = "SELECT * FROM web_shop.category;";
     private static final String SQL_SELECT_CATEGORY_BY_ID="SELECT * from web_shop.category c where c.id=?";
-    private static final String SQL_INSERT_CATEGORY = "INSERT INTO webshop_ip.category (name) VALUES (?);";
-    private static final String SQL_UPDATE_CATEGORY = "UPDATE webshop_ip.category k SET name=? WHERE k.id=?;";
+    private static final String SQL_INSERT_CATEGORY = "INSERT INTO web_shop.category (name) VALUES (?);";
+    private static final String SQL_UPDATE_CATEGORY = "UPDATE web_shop.category k SET name=? WHERE k.id=?;";
 
 
     public static boolean insertCategory(Category category) {
@@ -131,7 +131,7 @@ public class CategoryDAO {
             c = connectionPool.checkOut();
             ps =DBUtil.prepareStatement(c, SQL_DELETE_CATEGORY, false);
             ps.setInt(1, category.getId());
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

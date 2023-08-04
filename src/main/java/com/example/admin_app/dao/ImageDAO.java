@@ -16,7 +16,7 @@ public class ImageDAO {
     private static final String SQL_DELETE_IMAGE = "DELETE FROM web_shop.image WHERE id=?";
 
 
-    private static final String SQL_SELECT_ALL_BY_PRODUCT_ID = "SELECT * FROM webshop_ip.comment i where i.product_id=?;";
+    private static final String SQL_SELECT_ALL_BY_PRODUCT_ID = "SELECT * FROM web_shop.comment i where i.product_id=?;";
 
 
 
@@ -55,7 +55,7 @@ public class ImageDAO {
             c = connectionPool.checkOut();
             ps =DBUtil.prepareStatement(c, SQL_DELETE_IMAGE, false);
             ps.setInt(1, id);
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

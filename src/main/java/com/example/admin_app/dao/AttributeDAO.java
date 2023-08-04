@@ -15,7 +15,7 @@ public class AttributeDAO {
     private static final String SQL_DELETE_ATTRIBUTE = "DELETE FROM web_shop.attribute WHERE id=?";
     private static final String SQL_UPDATE_ATTRIBUTE = "UPDATE web_shop.attribute set name=?, type=? where id=?";
     private static final String SQL_ADD_ATTRIBUTE = "INSERT INTO web_shop.attribute (name,type,category_id) values (?,?,?)";
-    private static final String SQL_SELECT_ALL_BY_CATEGORY_ID = "SELECT * FROM webshop_ip.attribute a where a.category_id=?;";
+    private static final String SQL_SELECT_ALL_BY_CATEGORY_ID = "SELECT * FROM web_shop.attribute a where a.category_id=?;";
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
 
 
@@ -56,7 +56,7 @@ public class AttributeDAO {
             c = connectionPool.checkOut();
             ps = DBUtil.prepareStatement(c, SQL_DELETE_ATTRIBUTE, false);
             ps.setInt(1, id);
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

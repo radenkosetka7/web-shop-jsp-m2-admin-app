@@ -18,7 +18,7 @@ public class AttributeValueDAO
             c = connectionPool.checkOut();
             ps =DBUtil.prepareStatement(c, SQL_DELETE_ATTRIBUTE_VALUE, false);
             ps.setInt(1, attributeId);
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

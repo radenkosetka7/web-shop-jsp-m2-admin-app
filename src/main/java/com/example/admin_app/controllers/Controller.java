@@ -4,6 +4,7 @@ import com.example.admin_app.beans.AdminBean;
 import com.example.admin_app.beans.CategoryBean;
 import com.example.admin_app.beans.LoggerBean;
 import com.example.admin_app.beans.UserBean;
+import com.example.admin_app.dto.Category;
 import com.example.admin_app.dto.CustomUser;
 import com.example.admin_app.dto.enums.Status;
 
@@ -24,6 +25,8 @@ public class Controller extends HttpServlet {
     private static final String LOGGER = "/WEB-INF/pages/home.jsp";
     private static final String ERROR_PAGE = "/WEB-INF/pages/errorPage.jsp";
     private static final String USERS = "/WEB-INF/pages/users.jsp";
+    private static final String CATEGORIES = "/WEB-INF/pages/categories.jsp";
+
 
 
 
@@ -102,7 +105,7 @@ public class Controller extends HttpServlet {
                 }
                 else if(action.equals("categories"))
                 {
-
+                    address=CATEGORIES;
                 }
                 else if(action.equals("addCategory"))
                 {
@@ -114,11 +117,14 @@ public class Controller extends HttpServlet {
                 }
                 else if(action.equals("deleteCategory"))
                 {
-
+                    Integer id=Integer.parseInt(req.getParameter("id"));
+                    Category category=categoryBean.getAllCategoryById(id);
+                    categoryBean.deleteCategory(category);
+                    address=CATEGORIES;
                 }
                 else if(action.equals("logs"))
                 {
-
+                    address=LOGGER;
                 }
                 else
                 {

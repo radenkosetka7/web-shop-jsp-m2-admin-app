@@ -12,7 +12,7 @@ import java.util.List;
 public class CommentDAO {
 
     private static final String SQL_DELETE_COMMENT = "DELETE FROM web_shop.comment WHERE id=?";
-    private static final String SQL_SELECT_ALL_BY_PRODUCT_ID = "SELECT * FROM webshop_ip.comment c where c.product_id=?;";
+    private static final String SQL_SELECT_ALL_BY_PRODUCT_ID = "SELECT * FROM web_shop.comment c where c.product_id=?;";
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
 
     public static List<Comment> getAllByProductId(Integer id) {
@@ -48,7 +48,7 @@ public class CommentDAO {
             c = connectionPool.checkOut();
             ps = DBUtil.prepareStatement(c, SQL_DELETE_COMMENT, false);
             ps.setInt(1, id);
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

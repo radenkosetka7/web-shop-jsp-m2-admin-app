@@ -15,7 +15,7 @@ public class ProductDAO
 {
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
     private static final String SQL_DELETE_PRODUCT = "DELETE FROM web_shop.product WHERE id=?";
-    private static final String SQL_SELECT_ALL_BY_CATEGORY_ID = "SELECT * FROM webshop_ip.product p where p.category_id=?;";
+    private static final String SQL_SELECT_ALL_BY_CATEGORY_ID = "SELECT * FROM web_shop.product p where p.category_id=?;";
 
 
 
@@ -65,7 +65,7 @@ public class ProductDAO
             c = connectionPool.checkOut();
             ps =DBUtil.prepareStatement(c, SQL_DELETE_PRODUCT, false);
             ps.setInt(1, product.getId());
-            ps.executeQuery();
+            ps.execute();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
