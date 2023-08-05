@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Home</title>
+    <title>Categories</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -59,6 +59,14 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <h2>Categories</h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="search-box">
+                            <button type="button" class="btn btn-success" onclick="location.href='?action=addCategory'">
+                                <span class="fa fa-plus"></span>
+                                Add new category
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

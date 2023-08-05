@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Home</title>
+    <title>Users</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -27,6 +27,14 @@
             $('#myTable').DataTable();
         });
     </script>
+
+    <script>
+        // Funkcija koja će otvoriti modal kada se klikne na dugme
+        function openModal() {
+            $('#staticBackdrop2').modal('show');
+        }
+    </script>
+
 
     <script>
         $(document).ready(function(){
@@ -60,6 +68,14 @@
                     <div class="col-sm-6">
                         <h2>Users</h2>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="search-box">
+                            <button type="button" class="btn btn-success" onclick="location.href='?action=addUser'">
+                                <span class="fa fa-plus"></span>
+                                Add new user
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <table id="myTable" class="table table-striped">
@@ -68,10 +84,10 @@
                     <th style="width: 5%;">Id</th>
                     <th style="width: 10%;">Name</th>
                     <th style="width: 15%;">Surname</th>
-                    <th style="width: 20%;">Username</th>
+                    <th style="width: 25%;">Username</th>
                     <th style="width: 20%;">E-mail</th>
                     <th style="width: 15%;">City</th>
-                    <th style="width: 20%;">Role</th>
+                    <th style="width: 25%;">Role</th>
                     <th style="width: 10%;">Status</th>
                     <th style="width: 10%;">Avatar</th>
                     <th style="width: 15%;">Actions</th>

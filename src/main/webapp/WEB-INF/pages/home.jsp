@@ -71,7 +71,7 @@
                     <th>Id</th>
                     <th style="width: fit-content;">Message</th>
                     <th style="width: fit-content;">Class</th>
-                    <th style="width: fit-content;">Level</th>
+                    <th style="width: 5%">Level</th>
                     <th>Date</th>
                 </tr>
                 </thead>

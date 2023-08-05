@@ -13,10 +13,19 @@ import java.util.List;
 public class UserBean implements Serializable {
 
 
+    private CustomUser customUser;
     public UserBean()
     {
     }
 
+
+    public CustomUser getCustomUser() {
+        return customUser;
+    }
+
+    public void setCustomUser(CustomUser customUser) {
+        this.customUser = customUser;
+    }
 
     public List<CustomUser> getAllUsers()
     {

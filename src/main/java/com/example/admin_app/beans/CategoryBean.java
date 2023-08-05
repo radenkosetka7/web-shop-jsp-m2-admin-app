@@ -8,6 +8,7 @@ import java.util.List;
 
 public class CategoryBean implements Serializable {
 
+    private Category category;
     public CategoryBean() {
     }
 
@@ -34,5 +35,13 @@ public class CategoryBean implements Serializable {
     public void deleteCategory(Category category)
     {
         CategoryDAO.deleteCategory(category);
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

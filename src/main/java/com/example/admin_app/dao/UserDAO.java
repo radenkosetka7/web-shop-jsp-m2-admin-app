@@ -21,7 +21,7 @@ public class UserDAO {
     private static final String SQL_SELECT_ALL_USERS="SELECT * FROM web_shop.user";
     private static final String SQL_SELECT_USER_BY_ID="SELECT * from web_shop.user where id=?";
     private static final String SQL_UPDATE_USER_STATUS="UPDATE web_shop.user SET status=? where id=?";
-    private static final String SQL_UPDATE_USER="UPDATE web_shop.user set name=?, surname=?, city=?, username=?, password=?, avatar=?, role=?, status=?, mail=? where id=?";
+    private static final String SQL_UPDATE_USER="UPDATE web_shop.user set name=?, surname=?, city=?, username=?, avatar=?, role=?, status=?, mail=? where id=?";
     private static final String SQL_ADD_USER= "INSERT INTO web_shop.user (name,surname,city,username,password,avatar,role,status,mail) values (?,?,?,?,?,?,?,?,?)";
 
 
@@ -90,7 +90,7 @@ public class UserDAO {
             while (rs.next())
             {
                 customUser=(new CustomUser(rs.getInt("id"), rs.getString("name"), rs.getString("surname"),rs.getString("city"), rs.getString("username"), rs.getString("avatar"),
-                        rs.getString("password"),rs.getString("mail"), Status.valueOf(rs.getString("status")),Role.valueOf(rs.getString("role"))));
+                        rs.getString("password"),rs.getString("mail"), Status.getKey(rs.getInt("status")),Role.getKey(rs.getInt("role"))));
             }
             ps.close();
         } catch (SQLException e) {
@@ -132,12 +132,11 @@ public class UserDAO {
             ps.setString(2,customUser.getSurname());
             ps.setString(3,customUser.getCity());
             ps.setString(4,customUser.getUsername());
-            ps.setString(5,bCryptPasswordEncoder.encode(customUser.getPassword()));
-            ps.setString(6,customUser.getAvatar());
-            ps.setString(7,customUser.getRole().toString());
-            ps.setString(8,customUser.getStatus().toString());
-            ps.setString(9,customUser.getMail());
-            ps.setInt(10, customUser.getId());
+            ps.setString(5,customUser.getAvatar());
+            ps.setInt(6,Role.getValue(customUser.getRole()));
+            ps.setInt(7,Status.getValue(customUser.getStatus()));
+            ps.setString(8,customUser.getMail());
+            ps.setInt(9, customUser.getId());
             result=ps.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -161,8 +160,8 @@ public class UserDAO {
             ps.setString(4,customUser.getUsername());
             ps.setString(5,bCryptPasswordEncoder.encode(customUser.getPassword()));
             ps.setString(6,customUser.getAvatar());
-            ps.setString(7,customUser.getRole().toString());
-            ps.setString(8,customUser.getStatus().toString());
+            ps.setInt(7,Role.getValue(customUser.getRole()));
+            ps.setInt(8,Status.getValue(customUser.getStatus()));
             ps.setString(9,customUser.getMail());
             result=ps.executeUpdate() == 1;
         } catch (SQLException e) {
