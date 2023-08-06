@@ -1,15 +1,15 @@
-<%@ page import="com.example.admin_app.dto.CustomUser" %>
+<%@ page import="com.example.admin_app.dto.Attribute" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page errorPage="errorPage.jsp" %>
 
 
-<jsp:useBean id="userBean" class="com.example.admin_app.beans.UserBean" scope="session"/>
+<jsp:useBean id="categoryBean" class="com.example.admin_app.beans.CategoryBean" scope="session"/>
 
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Users</title>
+    <title>Attributes</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -27,6 +27,12 @@
             $('#myTable').DataTable();
         });
     </script>
+    <script>
+        function deleteAttributeWithCategory(idAttr, categoryId) {
+            var url = '?action=deleteAttribute&idAttr=' + idAttr + '&categoryId=' + categoryId;
+            location.href = url;
+        }
+    </script>
 
 </head>
 <body>
@@ -37,13 +43,13 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Users</h2>
+                        <h2>Attributes for category <%=categoryBean.getCategory().getName()%></h2>
                     </div>
                     <div class="col-sm-6">
                         <div class="search-box">
-                            <button type="button" class="btn btn-success" onclick="location.href='?action=addUser'">
+                            <button type="button" class="btn btn-success" onclick="location.href='?action=addAttribute'">
                                 <span class="fa fa-plus"></span>
-                                Add new user
+                                Add new attribute
                             </button>
                         </div>
                     </div>
@@ -52,44 +58,22 @@
             <table id="myTable" class="table table-striped">
                 <thead>
                 <tr>
-                    <th style="width: 5%;">Id</th>
-                    <th style="width: 10%;">Name</th>
-                    <th style="width: 15%;">Surname</th>
-                    <th style="width: 25%;">Username</th>
-                    <th style="width: 20%;">E-mail</th>
-                    <th style="width: 15%;">City</th>
-                    <th style="width: 25%;">Role</th>
-                    <th style="width: 10%;">Status</th>
-                    <th style="width: 10%;">Avatar</th>
-                    <th style="width: 15%;">Actions</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <% for(CustomUser customUser:userBean.getAllUsers()) {%>
+                <% for(Attribute attribute:categoryBean.getCategory().getAttributes()) {%>
                 <tr>
-                    <td><%=customUser.getId()%></td>
-                    <td style="word-wrap: break-word"><%=customUser.getName()%></td>
-                    <td style="word-wrap: break-word"><%=customUser.getSurname()%></td>
-                    <td style="word-wrap: break-word"><%=customUser.getUsername()%></td>
-                    <td style="word-wrap: break-word"><%=customUser.getMail()%></td>
-                    <td style="word-wrap: break-word"><%=customUser.getCity()%></td>
-                    <td style="word-wrap: break-word"><%=customUser.getRole()%></td>
-                    <td><%=customUser.getStatus()%></td>
-                    <td><% if (customUser.getAvatar() != null && customUser.getAvatar().length()>0) { %>
-                        <img src="<%=customUser.getAvatar()%>" width="16" height="16" alt="Avatar"/>
-                        <%}%></td>
-                    </td>
+                    <td><%=attribute.getId()%></td>
+                    <td style="word-wrap: break-word"><%=attribute.getName()%></td>
+                    <td style="word-wrap: break-word"><%=attribute.getType()%></td>
                     <td>
                         <div class="d-flex flex-row">
-
-                            <button title="Edit" style="width: fit-content" type="button" class="btn"
-                                    onclick="location.href='?action=updateUser&id=<%=customUser.getId()%>'">
-                                <span style="width: fit-content" class="fa fa-pencil text-dark"></span>
-                            </button>
-
-
                             <button title="Delete" style="width: fit-content" type="button" class="btn"
-                                    onclick="location.href='?action=deleteUser&id=<%=customUser.getId()%>'">
+                                    onclick="deleteAttributeWithCategory(<%=attribute.getId()%>, <%=categoryBean.getCategory().getId()%>)">
                                 <span style="width: fit-content" class="fa fa-trash text-danger"></span>
                             </button>
                         </div>

@@ -1,6 +1,7 @@
 package com.example.admin_app.controllers;
 
 import com.example.admin_app.beans.*;
+import com.example.admin_app.dto.Attribute;
 import com.example.admin_app.dto.Category;
 import com.example.admin_app.dto.CustomUser;
 import com.example.admin_app.dto.enums.Role;
@@ -27,6 +28,7 @@ public class Controller extends HttpServlet {
     private static final String ADD_USER = "/WEB-INF/pages/addUser.jsp";
     private static final String UPDATE_USER = "/WEB-INF/pages/updateUser.jsp";
     private static final String UPDATE_CATEGORY = "/WEB-INF/pages/updateCategory.jsp";
+    private static final String VIEW_ATTRIBUTES = "/WEB-INF/pages/attributes.jsp";
 
 
 
@@ -162,6 +164,28 @@ public class Controller extends HttpServlet {
                 else if(action.equals("logs"))
                 {
                     address=LOGGER;
+                }
+                else if(action.equals("deleteAttribute"))
+                {
+                    Integer id=Integer.parseInt(req.getParameter("idAttr"));
+                    attributeBean.deleteAttribute(id);
+                    Integer catId=Integer.parseInt(req.getParameter("categoryId"));
+                    Category category=categoryBean.getAllCategoryById(catId);
+                    categoryBean.setCategory(category);
+                    address=VIEW_ATTRIBUTES;
+                }
+                else if(action.equals("viewAttributes"))
+                {
+                    address=VIEW_ATTRIBUTES;
+                    Integer id=Integer.parseInt(req.getParameter("id"));
+                    if(id!=null) {
+                        Category category = categoryBean.getAllCategoryById(id);
+                        categoryBean.setCategory(category);
+                    }
+                }
+                else if(action.equals("addAttribute"))
+                {
+
                 }
                 else
                 {
