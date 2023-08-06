@@ -53,14 +53,13 @@
                 <thead>
                 <tr>
                     <th style="width: 5%;">Id</th>
-                    <th style="width: 10%;">Name</th>
-                    <th style="width: 15%;">Surname</th>
-                    <th style="width: 25%;">Username</th>
-                    <th style="width: 20%;">E-mail</th>
+                    <th style="width: 20%;">Name</th>
+                    <th style="width: 20%;">Surname</th>
+                    <th style="width: 30%;">Username</th>
+                    <th style="width: 25%;">E-mail</th>
                     <th style="width: 15%;">City</th>
                     <th style="width: 25%;">Role</th>
-                    <th style="width: 10%;">Status</th>
-                    <th style="width: 10%;">Avatar</th>
+                    <th style="width: 15%;">Status</th>
                     <th style="width: 15%;">Actions</th>
                 </tr>
                 </thead>
@@ -75,10 +74,6 @@
                     <td style="word-wrap: break-word"><%=customUser.getCity()%></td>
                     <td style="word-wrap: break-word"><%=customUser.getRole()%></td>
                     <td><%=customUser.getStatus()%></td>
-                    <td><% if (customUser.getAvatar() != null && customUser.getAvatar().length()>0) { %>
-                        <img src="<%=customUser.getAvatar()%>" width="16" height="16" alt="Avatar"/>
-                        <%}%></td>
-                    </td>
                     <td>
                         <div class="d-flex flex-row">
 

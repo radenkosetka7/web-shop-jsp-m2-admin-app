@@ -12,7 +12,7 @@ public class CategoryBean implements Serializable {
     public CategoryBean() {
     }
 
-    public boolean insertCategory(Category category)
+    public int insertCategory(Category category)
     {
         return CategoryDAO.insertCategory(category);
     }

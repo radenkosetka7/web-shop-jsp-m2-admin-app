@@ -1,0 +1,28 @@
+.add-one {
+    color: blue;
+    text-align: center;
+    font-weigth: bolder;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.delete {
+    color: white;
+    background-color: red;
+    text-align: center;
+    margin-top: 6px;
+    font-weight: 700;
+    border-radius: 5px;
+    min-width: 20px;
+    cursor: pointer;
+}
+
+
+.dynamic-element {
+    margin-bottom: 0px;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+}

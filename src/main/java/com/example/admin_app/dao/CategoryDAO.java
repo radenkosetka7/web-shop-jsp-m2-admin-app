@@ -13,30 +13,36 @@ import java.util.List;
 
 public class CategoryDAO {
 
-    private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
     private static final String SQL_DELETE_CATEGORY = "DELETE FROM web_shop.category WHERE id=?";
     private static final String SQL_SELECT_ALL_CATEGORIES = "SELECT * FROM web_shop.category;";
-    private static final String SQL_SELECT_CATEGORY_BY_ID="SELECT * from web_shop.category c where c.id=?";
+    private static final String SQL_SELECT_CATEGORY_BY_ID = "SELECT * from web_shop.category c where c.id=?";
     private static final String SQL_INSERT_CATEGORY = "INSERT INTO web_shop.category (name) VALUES (?);";
     private static final String SQL_UPDATE_CATEGORY = "UPDATE web_shop.category k SET name=? WHERE k.id=?;";
+    private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
 
-
-    public static boolean insertCategory(Category category) {
+    public static int insertCategory(Category category) {
         Connection c = null;
         PreparedStatement ps = null;
-        boolean result = false;
+        int tempId=0;
 
         try {
             c = connectionPool.checkOut();
-            ps = DBUtil.prepareStatement(c, SQL_INSERT_CATEGORY, false);
-            ps.setString(1,category.getName());
-            result=ps.executeUpdate() == 1;
+            ps = DBUtil.prepareStatement(c, SQL_INSERT_CATEGORY, true);
+            ps.setString(1, category.getName());
+            int resultTemp = ps.executeUpdate();
+            if (resultTemp == 1) {
+                ResultSet newResultSet=ps.getGeneratedKeys();
+                if(newResultSet.next())
+                {
+                    tempId=newResultSet.getInt(1);
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             connectionPool.checkIn(c);
         }
-        return result;
+        return tempId;
     }
 
     public static boolean updateCategory(Category category) {
@@ -47,8 +53,8 @@ public class CategoryDAO {
         try {
             c = connectionPool.checkOut();
             ps = DBUtil.prepareStatement(c, SQL_UPDATE_CATEGORY, false);
-            ps.setString(1,category.getName());
-            result=ps.executeUpdate() == 1;
+            ps.setString(1, category.getName());
+            result = ps.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -56,8 +62,8 @@ public class CategoryDAO {
         }
         return result;
     }
-    public static List<Category> getAllCategories()
-    {
+
+    public static List<Category> getAllCategories() {
         List<Category> categories = new ArrayList<>();
 
         Connection c = null;
@@ -69,9 +75,8 @@ public class CategoryDAO {
             ps = DBUtil.prepareStatement(c, SQL_SELECT_ALL_CATEGORIES, false);
             rs = ps.executeQuery();
 
-            while (rs.next())
-            {
-                Category category=new Category(rs.getInt("id"),rs.getString("name"));
+            while (rs.next()) {
+                Category category = new Category(rs.getInt("id"), rs.getString("name"));
                 category.setAttributes(AttributeDAO.getAllByCategoryId(category.getId()));
                 category.setProducts(ProductDAO.getAllByCategoryId(category.getId()));
                 categories.add(category);
@@ -85,10 +90,9 @@ public class CategoryDAO {
         return categories;
     }
 
-    public static Category getAllCategoryById(Integer id)
-    {
+    public static Category getAllCategoryById(Integer id) {
 
-        Category category=null;
+        Category category = null;
         Connection c = null;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -99,9 +103,8 @@ public class CategoryDAO {
             ps.setInt(1, id);
             rs = ps.executeQuery();
 
-            while (rs.next())
-            {
-                category=new Category(rs.getInt("id"),rs.getString("name"));
+            while (rs.next()) {
+                category = new Category(rs.getInt("id"), rs.getString("name"));
                 category.setAttributes(AttributeDAO.getAllByCategoryId(category.getId()));
                 category.setProducts(ProductDAO.getAllByCategoryId(category.getId()));
             }
@@ -116,20 +119,18 @@ public class CategoryDAO {
 
     public static void deleteCategory(Category category) {
         Connection c = null;
-        PreparedStatement ps=null;
+        PreparedStatement ps = null;
 
         try {
 
-            for(Attribute attribute:category.getAttributes())
-            {
+            for (Attribute attribute : category.getAttributes()) {
                 AttributeDAO.deleteAttribute(attribute.getId());
             }
-            for(Product product:category.getProducts())
-            {
+            for (Product product : category.getProducts()) {
                 ProductDAO.deleteProduct(product);
             }
             c = connectionPool.checkOut();
-            ps =DBUtil.prepareStatement(c, SQL_DELETE_CATEGORY, false);
+            ps = DBUtil.prepareStatement(c, SQL_DELETE_CATEGORY, false);
             ps.setInt(1, category.getId());
             ps.execute();
             ps.close();
