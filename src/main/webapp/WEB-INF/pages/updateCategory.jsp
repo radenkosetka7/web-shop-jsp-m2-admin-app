@@ -34,12 +34,12 @@
                     </div>
                     <% for (Attribute attribute : categoryBean.getCategory().getAttributes()) { %>
                     <div class="form-group"  style="display: inline-block;">
-                        <label for="city">Name</label>
-                        <input type="text" class="form-control" value="<%=attribute.getName()%>" id="city" name="city" placeholder="Enter city" required>
+                        <label for="attrName_<%=attribute.getId()%>">Name</label>
+                        <input type="text" class="form-control" value="<%=attribute.getName()%>" id="attrName_<%=attribute.getId()%>" name="attrName_<%=attribute.getId()%>" required>
                     </div>
                     <div class="form-group"  style="display: inline-block;">
-                        <label for="type">Type</label>
-                        <select class="form-control" id="type" name="type" required>
+                        <label for="type_<%=attribute.getId()%>">Type</label>
+                        <select class="form-control" id="type_<%=attribute.getId()%>" name="type_<%=attribute.getId()%>" required>
                          <option value="0" <%= attribute.getType() == Type.STRING ? "selected" : "" %>>STRING</option>
                        <option value="1" <%= attribute.getType() == Type.INT ? "selected" : "" %>>INT</option>
                         <option value="2" <%= attribute.getType() == Type.DOUBLE ? "selected" : "" %>>DOUBLE</option>

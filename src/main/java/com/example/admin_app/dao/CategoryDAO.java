@@ -54,6 +54,7 @@ public class CategoryDAO {
             c = connectionPool.checkOut();
             ps = DBUtil.prepareStatement(c, SQL_UPDATE_CATEGORY, false);
             ps.setString(1, category.getName());
+            ps.setInt(2, category.getId());
             result = ps.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();

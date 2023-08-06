@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Enumeration;
 
 @WebServlet(name = "controller", value = "/admin-controller")
 public class Controller extends HttpServlet {
@@ -146,6 +147,44 @@ public class Controller extends HttpServlet {
                     Integer id = Integer.parseInt(req.getParameter("id"));
                     Category category = categoryBean.getAllCategoryById(id);
                     categoryBean.setCategory(category);
+                    if(req.getParameter("submit") != null)
+                    {
+                        String categoryName=req.getParameter("name");
+                        category.setName(categoryName);
+                        categoryBean.updateCategory(category);
+                        Enumeration<String> params = req.getParameterNames();
+                        while (params.hasMoreElements())
+                        {
+                            String paramName=params.nextElement();
+                            if (paramName.startsWith("attrName"))
+                            {
+                                Integer index = Integer.parseInt(paramName.substring("attrName_".length()));
+                                String attributeName = req.getParameter("attrName_" + index);
+                                String typeParamName = "type_" + index;
+                                Integer switchType=Integer.parseInt(req.getParameter(typeParamName));
+                                Type type=Type.STRING;
+                                switch (switchType) {
+                                    case 0:
+                                        type = Type.STRING;
+                                        break;
+                                    case 1:
+                                        type = Type.INT;
+                                        break;
+                                    case 2:
+                                        type = Type.DOUBLE;
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                                Attribute attribute=new Attribute(index,attributeName,type);
+                                attributeBean.updateAttribute(attribute);
+
+                            }
+                        }
+
+                        address=CATEGORIES;
+                    }
                 } else if (action.equals("deleteCategory")) {
                     Integer id = Integer.parseInt(req.getParameter("id"));
                     Category category = categoryBean.getAllCategoryById(id);
@@ -167,7 +206,8 @@ public class Controller extends HttpServlet {
                         Category category = categoryBean.getAllCategoryById(id);
                         categoryBean.setCategory(category);
                     }
-                } else if (action.equals("addAttribute")) {
+                } else if (action.equals("addAttribute"))
+                {
 
                 } else {
                     address = ERROR_PAGE;

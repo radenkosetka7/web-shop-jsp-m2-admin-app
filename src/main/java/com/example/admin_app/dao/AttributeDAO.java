@@ -75,6 +75,7 @@ public class AttributeDAO {
             ps = DBUtil.prepareStatement(c, SQL_UPDATE_ATTRIBUTE, false);
             ps.setString(1, attribute.getName());
             ps.setString(2, attribute.getType().toString());
+            ps.setInt(3,attribute.getId());
             result = ps.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
