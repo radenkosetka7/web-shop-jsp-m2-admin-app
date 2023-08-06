@@ -10,7 +10,6 @@
 
   <div>
     <h2>An error occured.</h2>
-    <button type="button" onclick="location.href='home.jsp'">Return To Home</button>
   </div>
 </div>
 

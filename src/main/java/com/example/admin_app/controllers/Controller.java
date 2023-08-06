@@ -32,6 +32,8 @@ public class Controller extends HttpServlet {
     private static final String UPDATE_CATEGORY = "/WEB-INF/pages/updateCategory.jsp";
     private static final String VIEW_ATTRIBUTES = "/WEB-INF/pages/attributes.jsp";
     private static final String ADD_CATEGORY = "/WEB-INF/pages/addCategory.jsp";
+    private static final String ADD_ATTRIBUTE = "/WEB-INF/pages/addAtributes.jsp";
+
 
 
     public Controller() {
@@ -145,6 +147,7 @@ public class Controller extends HttpServlet {
                 } else if (action.equals("updateCategory")) {
                     address = UPDATE_CATEGORY;
                     Integer id = Integer.parseInt(req.getParameter("id"));
+                    System.out.println("id " + id);
                     Category category = categoryBean.getAllCategoryById(id);
                     categoryBean.setCategory(category);
                     if(req.getParameter("submit") != null)
@@ -206,10 +209,31 @@ public class Controller extends HttpServlet {
                         Category category = categoryBean.getAllCategoryById(id);
                         categoryBean.setCategory(category);
                     }
-                } else if (action.equals("addAttribute"))
+                } else if (action.equals("addAtributes"))
                 {
-
+                    address=ADD_ATTRIBUTE;
+                    Integer id = Integer.parseInt(req.getParameter("id"));
+                    String[] attributeNames = req.getParameterValues("attributeName[]");
+                    String[] attributeTypes = req.getParameterValues("attributeType[]");
+                    if (req.getParameter("submit") != null)
+                    {
+                        if(attributeNames!=null && attributeTypes !=null)
+                        {
+                            for(int i=0;i<attributeNames.length;i++)
+                            {
+                                String attrName=attributeNames[i];
+                                String attrType=attributeTypes[i];
+                                Type type=Type.getKey(Integer.parseInt(attrType));
+                                Attribute attribute=new Attribute(0,attrName,type);
+                                attributeBean.insertAttribute(attribute,id);
+                            }
+                        }
+                        Category category=categoryBean.getAllCategoryById(id);
+                        categoryBean.setCategory(category);
+                        address=VIEW_ATTRIBUTES;
+                    }
                 } else {
+                    System.out.println(action);
                     address = ERROR_PAGE;
                 }
             }

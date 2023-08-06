@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="search-box">
-                            <button type="button" class="btn btn-success" onclick="location.href='?action=addAttribute'">
+                            <button type="button" class="btn btn-success" onclick="location.href='?action=addAtributes&id=<%=categoryBean.getCategory().getId()%>'">
                                 <span class="fa fa-plus"></span>
                                 Add new attribute
                             </button>
