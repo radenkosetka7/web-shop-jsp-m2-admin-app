@@ -67,13 +67,6 @@
                             <option value="2" <%= userBean.getCustomUser().getStatus() == Status.BLOCKED ? "selected" : "" %>>BLOCKED</option>
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        <label for="avatar">Avatar</label>
-                        <input type="file" class="form-control" value="<%=userBean.getCustomUser().getAvatar()%>" id="avatar" name="avatar"
-                               data-validation-allowing="jpg,png,gif" data-validation="mime size"
-                               data-validation-max-size="5M">
-                    </div>
                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

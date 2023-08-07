@@ -6,7 +6,6 @@ import com.example.admin_app.dto.enums.Status;
 public class CustomUser extends User{
 
     private String city;
-    private String avatar;
     private String mail;
     private Status status;
     private Role role;
@@ -16,11 +15,10 @@ public class CustomUser extends User{
         super();
     }
 
-    public CustomUser(Integer id, String name, String surname, String city, String username, String avatar, String password, String mail, Status status, Role role)
+    public CustomUser(Integer id, String name, String surname, String city, String username,String password, String mail, Status status, Role role)
     {
         super(id,name,surname,username,password);
         this.city=city;
-        this.avatar=avatar;
         this.mail=mail;
         this.status=status;
         this.role=role;
@@ -34,13 +32,6 @@ public class CustomUser extends User{
         this.city = city;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
 
     public String getMail() {
         return mail;

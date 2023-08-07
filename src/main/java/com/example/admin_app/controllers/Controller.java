@@ -89,7 +89,7 @@ public class Controller extends HttpServlet {
                         String role = req.getParameter("role");
                         Role roleType = Role.getKey(Integer.parseInt(role));
                         CustomUser customUser = new CustomUser(0, req.getParameter("name"), req.getParameter("surname"),
-                                req.getParameter("city"), req.getParameter("username"), req.getParameter("avatar"),
+                                req.getParameter("city"), req.getParameter("username"),
                                 req.getParameter("password"), req.getParameter("mail"), Status.ACTIVE, roleType);
 
                         if (userBean.insertUser(customUser)) {
@@ -107,7 +107,7 @@ public class Controller extends HttpServlet {
                         String role = req.getParameter("role");
                         String status = req.getParameter("status");
                         CustomUser customUserUpdate = new CustomUser(id, req.getParameter("name"), req.getParameter("surname"),
-                                req.getParameter("city"), req.getParameter("username"), req.getParameter("avatar"),
+                                req.getParameter("city"), req.getParameter("username"),
                                 req.getParameter("password"), req.getParameter("mail"), Status.getKey(Integer.parseInt(status)), Role.getKey(Integer.parseInt(role)));
 
                         if (userBean.updateUser(customUserUpdate)) {
