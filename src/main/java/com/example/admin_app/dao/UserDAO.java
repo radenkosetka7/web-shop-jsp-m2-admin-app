@@ -17,7 +17,7 @@ public class UserDAO {
 
     private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
     private static BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-    private static final String SQL_SELECT_USER_BY_USERNAME = "SELECT * FROM web_shop.user WHERE status=1 and role=0 and BINARY username=?";
+    private static final String SQL_SELECT_USER_BY_USERNAME = "SELECT * FROM web_shop.employee WHERE role=0 and BINARY username=?";
     private static final String SQL_SELECT_ALL_USERS="SELECT * FROM web_shop.user";
     private static final String SQL_SELECT_USER_BY_ID="SELECT * from web_shop.user where id=?";
     private static final String SQL_UPDATE_USER_STATUS="UPDATE web_shop.user SET status=? where id=?";
@@ -40,7 +40,7 @@ public class UserDAO {
             ps.setString(1, username);
             rs = ps.executeQuery();
             if (rs.next()) {
-                admin = new Admin(rs.getInt("id"), rs.getString("name"), rs.getString("surname"), rs.getString("username"), rs.getString("password"));
+                admin = new Admin(rs.getInt("id"), rs.getString("firstname"), rs.getString("surname"), rs.getString("username"), rs.getString("password"));
             }
             ps.close();
         } catch (SQLException e) {
