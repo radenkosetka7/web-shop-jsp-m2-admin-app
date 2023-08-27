@@ -1,8 +1,5 @@
 package com.example.admin_app.dto;
 
-import com.example.admin_app.dto.enums.Role;
-import com.example.admin_app.dto.enums.Status;
-
 public class Admin extends User{
 
 

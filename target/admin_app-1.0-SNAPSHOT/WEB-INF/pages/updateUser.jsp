@@ -50,16 +50,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="role">Role</label>
-                        <select class="form-control" id="role" name="role" required>
-                            <option value="0" <%=userBean.getCustomUser().getRole() == Role.ADMIN ? "selected" :""%> >ADMIN</option>
-                            <option value="1" <%=userBean.getCustomUser().getRole() == Role.SUPPORT ? "selected" :""%> >SUPPORT</option>
-                            <option value="2" <%=userBean.getCustomUser().getRole() == Role.CUSTOM_USER ? "selected" :""%> >CUSTOMER_SUPPORT</option>
-
-                        </select>
-                    </div>
-
-                    <div class="form-group">
                         <label for="status">Status</label>
                         <select class="form-control" id="status" name="status" required>
                             <option value="0" <%= userBean.getCustomUser().getStatus() == Status.REQUESTED ? "selected" : "" %>>REQUESTED</option>

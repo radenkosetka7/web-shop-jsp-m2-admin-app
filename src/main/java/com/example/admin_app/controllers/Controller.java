@@ -86,11 +86,9 @@ public class Controller extends HttpServlet {
                 } else if (action.equals("addUser")) {
                     address = ADD_USER;
                     if (req.getParameter("submit") != null) {
-                        String role = req.getParameter("role");
-                        Role roleType = Role.getKey(Integer.parseInt(role));
                         CustomUser customUser = new CustomUser(0, req.getParameter("name"), req.getParameter("surname"),
                                 req.getParameter("city"), req.getParameter("username"),
-                                req.getParameter("password"), req.getParameter("mail"), Status.ACTIVE, roleType);
+                                req.getParameter("password"), req.getParameter("mail"), Status.ACTIVE);
 
                         if (userBean.insertUser(customUser)) {
                             address = USERS;
@@ -104,11 +102,10 @@ public class Controller extends HttpServlet {
                     userBean.setCustomUser(customUser);
 
                     if (req.getParameter("submit") != null) {
-                        String role = req.getParameter("role");
                         String status = req.getParameter("status");
                         CustomUser customUserUpdate = new CustomUser(id, req.getParameter("name"), req.getParameter("surname"),
                                 req.getParameter("city"), req.getParameter("username"),
-                                req.getParameter("password"), req.getParameter("mail"), Status.getKey(Integer.parseInt(status)), Role.getKey(Integer.parseInt(role)));
+                                req.getParameter("password"), req.getParameter("mail"), Status.getKey(Integer.parseInt(status)));
 
                         if (userBean.updateUser(customUserUpdate)) {
                             address = USERS;
@@ -147,7 +144,6 @@ public class Controller extends HttpServlet {
                 } else if (action.equals("updateCategory")) {
                     address = UPDATE_CATEGORY;
                     Integer id = Integer.parseInt(req.getParameter("id"));
-                    System.out.println("id " + id);
                     Category category = categoryBean.getAllCategoryById(id);
                     categoryBean.setCategory(category);
                     if(req.getParameter("submit") != null)
@@ -233,7 +229,6 @@ public class Controller extends HttpServlet {
                         address=VIEW_ATTRIBUTES;
                     }
                 } else {
-                    System.out.println(action);
                     address = ERROR_PAGE;
                 }
             }

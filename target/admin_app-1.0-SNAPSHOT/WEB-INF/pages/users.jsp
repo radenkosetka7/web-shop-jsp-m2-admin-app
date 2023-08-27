@@ -58,7 +58,6 @@
                     <th style="width: 30%;">Username</th>
                     <th style="width: 25%;">E-mail</th>
                     <th style="width: 15%;">City</th>
-                    <th style="width: 25%;">Role</th>
                     <th style="width: 15%;">Status</th>
                     <th style="width: 15%;">Actions</th>
                 </tr>
@@ -72,7 +71,6 @@
                     <td style="word-wrap: break-word"><%=customUser.getUsername()%></td>
                     <td style="word-wrap: break-word"><%=customUser.getMail()%></td>
                     <td style="word-wrap: break-word"><%=customUser.getCity()%></td>
-                    <td style="word-wrap: break-word"><%=customUser.getRole()%></td>
                     <td><%=customUser.getStatus()%></td>
                     <td>
                         <div class="d-flex flex-row">

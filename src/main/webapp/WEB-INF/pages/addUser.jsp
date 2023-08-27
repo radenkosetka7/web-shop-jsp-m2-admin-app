@@ -49,15 +49,6 @@
                                required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="role">Role</label>
-                        <select class="form-control" id="role" name="role" required>
-                            <option value="0">ADMIN</option>
-                            <option value="1">SUPPORT</option>
-                            <option value="2">CUSTOM_USER</option>
-                        </select>
-                    </div>
-
                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

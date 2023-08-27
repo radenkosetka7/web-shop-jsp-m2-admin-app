@@ -8,20 +8,18 @@ public class CustomUser extends User{
     private String city;
     private String mail;
     private Status status;
-    private Role role;
 
     public CustomUser()
     {
         super();
     }
 
-    public CustomUser(Integer id, String name, String surname, String city, String username,String password, String mail, Status status, Role role)
+    public CustomUser(Integer id, String name, String surname, String city, String username,String password, String mail, Status status)
     {
         super(id,name,surname,username,password);
         this.city=city;
         this.mail=mail;
         this.status=status;
-        this.role=role;
     }
 
     public String getCity() {
@@ -49,11 +47,4 @@ public class CustomUser extends User{
         this.status = status;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }
